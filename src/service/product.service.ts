@@ -1,8 +1,8 @@
-import { DocumentDefinition, FilterQuery, QueryOptions, UpdateQuery } from "mongoose";
-import ProductModel, { ProductDocument } from "../models/product.model";
+import { FilterQuery, QueryOptions, UpdateQuery } from "mongoose";
+import ProductModel, { ProductDocument, ProdutInput } from "../models/product.model";
 
 
-export async function storeProduct(input: DocumentDefinition<Omit<ProductDocument, 'createdAt' | 'updatedAt'>>) {
+export async function storeProduct(input: ProdutInput) {
   return ProductModel.create(input)
 }
 
@@ -15,5 +15,5 @@ export async function updateProduct(query: FilterQuery<ProductDocument>, update:
 }
 
 export async function destroyProduct(query: FilterQuery<ProductDocument>) {
-  return ProductModel.deleteOne(query)
+  return ProductModel.findOneAndDelete(query)
 }
